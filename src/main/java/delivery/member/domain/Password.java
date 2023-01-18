@@ -1,10 +1,12 @@
-package member.domain;
+package delivery.member.domain;
 
-import member.exception.MemberExceptionCode;
+import delivery.exception.AuthorizationException;
+import delivery.member.exception.MemberExceptionCode;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 @Embeddable
@@ -32,5 +34,30 @@ public class Password {
         if (!Pattern.matches(REGEX.pattern(), password)) {
             throw new IllegalArgumentException(MemberExceptionCode.INVALID_PASSWORD.getMessage());
         }
+    }
+
+    public void checkPassword(String password) {
+        if (!equals(new Password(password))) {
+            throw new AuthorizationException(MemberExceptionCode.PASSWORD_NOT_MATCH.getMessage());
+        }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Password password1 = (Password) o;
+        return Objects.equals(password, password1.password);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(password);
     }
 }

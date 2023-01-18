@@ -1,7 +1,10 @@
-package member.domain;
+package delivery.member.domain;
 
-import member.exception.MemberExceptionCode;
+import delivery.exception.AuthorizationException;
+import delivery.member.domain.Password;
+import delivery.member.exception.MemberExceptionCode;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -60,5 +63,16 @@ class PasswordTest {
         assertDoesNotThrow(() -> {
           new Password(password);
         });
+    }
+
+    @DisplayName("입력된 비밀번호가 사용자의 비밀번호와 일치하지 않는다.")
+    @Test
+    void checkPassword() {
+        Password password = new Password("acinEo5nL7cie1");
+
+        assertThatThrownBy(() -> {
+            password.checkPassword("acinEo5nL7cie1#&%");
+        }).isInstanceOf(AuthorizationException.class)
+                .hasMessage(MemberExceptionCode.PASSWORD_NOT_MATCH.getMessage());
     }
 }
