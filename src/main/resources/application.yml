@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: true
+
+jwt:
+  secret: ih1bGcpT3qLWV7zq57TeVA9XkHab2UiLC9LnoXR5cCt9V7zVlwE08fOiIi
+  expiration: 3600000
