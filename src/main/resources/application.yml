@@ -7,7 +7,7 @@ spring:
 
 logging:
   level:
-    org.hibernate.type.descriptor.sql: true
+    org.hibernate.type.descriptor.sql: trace
 
 jwt:
   secret: ih1bGcpT3qLWV7zq57TeVA9XkHab2UiLC9LnoXR5cCt9V7zVlwE08fOiIi

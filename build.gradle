@@ -18,8 +18,10 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation group: 'com.google.guava', name: 'guava', version: '30.0-jre'
 
     runtimeOnly 'com.h2database:h2'
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
